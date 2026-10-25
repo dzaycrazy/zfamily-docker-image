@@ -16,7 +16,7 @@ ENTRYPOINT · CMD · USER `container` · WORKDIR `/home/container`
 
 ## Dùng trong panel
 1. Startup → Docker image → **Custom image…**
-2. Dán `ghcr.io/<tên-github-viết-thường>/zfamily-multi:1`
+2. Dán `ghcr.io/dzaycrazy/zfamily-multi:1`
 3. Restart server.
 4. Startup command: giữ nguyên.
 
