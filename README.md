@@ -1,7 +1,7 @@
 # zfamily-multi — Docker
 
-Image: `ghcr.io/<tên-github-viết-thường>/zfamily-multi:1`
-Base: `ghcr.io/pterodactyl/yolks:nodejs_20`
+Image: `ghcr.io/dzaycrazy/zfamily-multi:1`
+Base: `ghcr.io/ptero-eggs/yolks:nodejs_25`
 
 ## Có sẵn
 node.js 25 · ts-node · typescript · python 3.14 + pip · gcc · g++ · make · go · java (JDK) · ruby · php · perl · lua · rust + cargo · bubblewrap · git · curl
