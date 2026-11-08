@@ -1,6 +1,6 @@
 # zfamily-multi — Docker
 
-Image: `ghcr.io/dzaycrazy/zfamily-multi:1`
+Image: `ghcr.io/dzaycrazy/zfamily-multi:laste`
 Base: `ghcr.io/ptero-eggs/yolks:nodejs_25`
 
 ## Có sẵn
@@ -8,11 +8,6 @@ node.js 25 · ts-node · typescript · python 3.14 + pip · gcc · g++ · make �
 
 ## Không đổi
 ENTRYPOINT · CMD · USER `container` · WORKDIR `/home/container`
-
-## Build
-1. Đẩy code lên nhánh `main`.
-2. GitHub Actions tự build và push lên GHCR.
-3. Packages → `zfamily-multi` → Visibility → **Public**.
 
 ## Dùng trong panel
 1. Startup → Docker image → **Custom image…**
