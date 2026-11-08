@@ -1,6 +1,6 @@
 # zfamily-multi — Docker
 
-Image: `ghcr.io/dzaycrazy/zfamily-multi:laste`
+Image: `ghcr.io/dzaycrazy/zfamily-multi:latest`
 Base: `ghcr.io/ptero-eggs/yolks:nodejs_25`
 
 ## Có sẵn
