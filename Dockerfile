@@ -17,6 +17,13 @@ RUN apt-get install -y --no-install-recommends \
       libsqlite3-dev liblzma-dev libncursesw5-dev tk-dev \
  && npm install -g typescript ts-node
 
+# ---- Ngôn ngữ bổ sung (apt): Clang, Fortran, R, Haskell, Elixir/Erlang ----
+RUN apt-get install -y --no-install-recommends \
+      clang gfortran \
+      r-base-core \
+      ghc \
+      elixir
+
 ARG PYTHON_VERSION=3.14.8
 RUN cd /usr/src \
  && wget -q https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
@@ -39,6 +46,28 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     PATH=/usr/local/cargo/bin:$PATH
 RUN curl -fsSL https://sh.rustup.rs | sh -s -- -y --default-toolchain stable --profile minimal \
  && chmod -R a+w $RUSTUP_HOME $CARGO_HOME
+
+# ---- C# / .NET (LTS) ----
+ENV DOTNET_ROOT=/usr/share/dotnet \
+    DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+    DOTNET_NOLOGO=1 \
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 \
+    PATH=$PATH:/usr/share/dotnet
+RUN curl -fsSL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh \
+ && bash /tmp/dotnet-install.sh --channel LTS --install-dir /usr/share/dotnet \
+ && rm /tmp/dotnet-install.sh
+
+# ---- Kotlin (bản mới nhất) ----
+RUN set -eux; \
+    KOTLIN_VERSION="$(curl -fsSLI -o /dev/null -w '%{url_effective}' https://github.com/JetBrains/kotlin/releases/latest | sed 's#.*/tag/v##')"; \
+    curl -fsSL "https://github.com/JetBrains/kotlin/releases/download/v${KOTLIN_VERSION}/kotlin-compiler-${KOTLIN_VERSION}.zip" -o /tmp/kotlin.zip; \
+    unzip -q /tmp/kotlin.zip -d /opt; \
+    ln -s /opt/kotlinc/bin/* /usr/local/bin/; \
+    rm /tmp/kotlin.zip
+
+# ---- Deno & Bun ----
+RUN curl -fsSL https://deno.land/install.sh | DENO_INSTALL=/usr/local sh \
+ && curl -fsSL https://bun.sh/install | BUN_INSTALL=/usr/local bash
 
 RUN apt-get purge -y wget gnupg && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/* /root/.npm
